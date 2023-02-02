@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<li>ID: <input type="text" id="id" placeholder="아이디를 입력해 주세요 (5글자 이상)"></li>
+<li>PASSWORD: <input type="text" id="password" placeholder="비밀번호를 입력해 주세요 (7글자 이상)"></li>
+<li>NAME: <input type="text" id="name" placeholder="이름을 입력해 주세요"></li>
+<li>AGE: <input type="number" id="age" placeholder="나이를 입력해 주세요"></li>
+<li>PHONE NUMBER: <input type="text" id="phoneNumber" placeholder="핸드폰 번호를 입력해 주세요"></li>
+<li>ADDRESS: <input type="text" id="address" placeholder="주소를 입력해 주세요"></li>
+<button id="signupBtn" onclick="submit()">회원가입 하기</button>
+<div id="userInfo"></div>
+
+<script>
+    $("signupBtn").click(submit());
+    function submit(){
+        if ($("#id").val().length<5){
+            alert("id는 5글자 이상 입력해 주세요.")
+            return;
+        }
+        if ($("#password").val().length<7){
+            alert("비밀번호는 7글자 이상 입력해 주세요.")
+            return;
+        }
+        if ($("#name").val().length<1 || $("#age").val().length<1 || $("#phoneNumber").val().length<10 || $("#address").val().length<1 ){
+            alert("빈칸없이 정확히 입력해 주세요.")
+            return;
+        }
+        var id = $("#id").val();
+        var password = $("#password").val();
+        var name = $("#name").val();
+        var age = $("#age").val();
+        var phoneNumber = $("#phoneNumber").val();
+        var address = $("#address").val();
+
+        alert("test")
+        alert(id)
+
+        $.ajax({
+            url:"/signup",
+            type:"POST",
+            data:
+                {
+                    id:id,
+                    password:password,
+                    name:name,
+                    age:age,
+                    phoneNumber:phoneNumber,
+                    address:address
+                },
+            success: function (result){
+                if (result!=null){
+                    alert("회원가입 성공")
+                    $("userInfo").html(result)
+                }else{
+                    alert("회원가입 실패")
+                }
+            }
+        })
+
+
+    }
+</script>
+
+
+</body>
+</html>
