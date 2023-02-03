@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name = "tn_member")
 public class User {
 
@@ -22,12 +23,16 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "age")
     private int age;
+
     @Column(name = "phoneNumber")
     private String phoneNumber;
+
     @Column(name = "address")
     private String address;
 }

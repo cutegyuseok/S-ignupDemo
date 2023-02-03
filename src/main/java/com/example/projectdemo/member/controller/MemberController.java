@@ -14,7 +14,6 @@ public class MemberController {
     private final UserServiceImpl userService;
     @PostMapping ("/signup")
     public UserRespDto signUp(UserReqDto dto){
-        System.out.println(dto.toString());
         return userService.signup(dto);
     }
 }
